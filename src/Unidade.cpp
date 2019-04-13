@@ -6,13 +6,20 @@
 
 using namespace std;
 
+Unidade::Unidade(int x, int y, int vida) {
+    set_coordenadas(x,y);
+    set_vida(vida);
+}
+
+Unidade::~Unidade() = default;
+
 void Unidade::set_coordenadas(int x, int y){
     coordenadas.first = x;
     coordenadas.second = y;
 }
 
-void Unidade::set_vida(int vida){
-    this->vida = vida;
+void Unidade::set_vida(int v){
+    this->vida = v;
 }
 
 int Unidade::get_vida(){

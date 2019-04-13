@@ -15,7 +15,7 @@ private:
     pair<int, int> coordenadas;
     int vida;
 public:
-    Unidade();
+    Unidade(int x, int y, int vida);
     ~Unidade();
     void set_coordenadas(int x, int y);
     void set_vida(int vida);
