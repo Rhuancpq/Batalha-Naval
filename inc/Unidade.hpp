@@ -1,9 +1,9 @@
 //
-// Created by rhuan on 11/04/19.
+// Created by rhuan on 13/04/19.
 //
 
-#ifndef EP1_UNIDADE_H
-#define EP1_UNIDADE_H
+#ifndef EP1_UNIDADE_HPP
+#define EP1_UNIDADE_HPP
 
 #include <utility>
 #include <vector>
@@ -23,4 +23,4 @@ public:
     pair<int, int> get_coordenadas();
 };
 
-#endif
+#endif //EP1_UNIDADE_HPP
