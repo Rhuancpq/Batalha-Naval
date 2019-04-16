@@ -4,6 +4,11 @@
 
 #include "Embarcacao.hpp"
 
-Embarcacao::~Embarcacao(){}
+void Embarcacao::set_corpo(int pos, pair<int, int> * coord, int vida) {
+    corpo[pos] = new Unidade(coord->first,coord->second,vida);
+}
 
-Embarcacao::Embarcacao() {}
+Unidade * Embarcacao::get_corpo(int pos) {
+    Unidade * temp = corpo[pos];
+    return  temp;
+}

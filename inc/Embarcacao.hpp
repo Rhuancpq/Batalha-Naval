@@ -6,16 +6,17 @@
 #define EP1_EMBARCACAO_HPP
 
 #include <vector>
+#include <utility>
 #include "Unidade.hpp"
 using namespace std;
 
 class Embarcacao{
 private:
-    vector<Unidade*>corpo;
+    Unidade * corpo[4] = {};
 public:
-    Embarcacao();
-    ~Embarcacao();
+    void set_corpo(int pos, pair<int,int> * coord, int vida);
     virtual void defender() = 0;
+    Unidade * get_corpo(int pos);
 };
 
 #endif //EP1_EMBARCACAO_HPP

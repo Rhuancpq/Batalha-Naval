@@ -8,7 +8,7 @@
 
 class Submarino : public Embarcacao{
 public:
-    Submarino();
+    Submarino(int x0, int y0, int x1, int y1);
     ~Submarino();
     void defender(int x, int y);
 };
