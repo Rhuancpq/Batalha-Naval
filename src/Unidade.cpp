@@ -7,8 +7,9 @@
 using namespace std;
 
 Unidade::Unidade(int x, int y, int vida) {
-    set_coordenadas(x,y);
-    set_vida(vida);
+    coordenadas.first = x;
+    coordenadas.second = y;
+    this->vida = vida;
 }
 
 Unidade::~Unidade() = default;
@@ -20,6 +21,10 @@ void Unidade::set_coordenadas(int x, int y){
 
 void Unidade::set_vida(int v){
     this->vida = v;
+}
+
+void Unidade::soma_vida(int v) {
+    this->vida += v;
 }
 
 int Unidade::get_vida(){

@@ -14,7 +14,7 @@ class Embarcacao{
 private:
     Unidade * corpo[4] = {};
 public:
-    void set_corpo(int pos, pair<int,int> * coord, int vida);
+    void set_corpo(int pos, int x, int y, int vida);
     virtual void defender() = 0;
     Unidade * get_corpo(int pos);
 };

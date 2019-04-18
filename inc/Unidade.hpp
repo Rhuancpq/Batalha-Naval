@@ -19,6 +19,7 @@ public:
     ~Unidade();
     void set_coordenadas(int x, int y);
     void set_vida(int vida);
+    void soma_vida(int v);
     int get_vida();
     pair<int, int> get_coordenadas();
 };

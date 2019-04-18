@@ -4,8 +4,8 @@
 
 #include "Embarcacao.hpp"
 
-void Embarcacao::set_corpo(int pos, pair<int, int> * coord, int vida) {
-    corpo[pos] = new Unidade(coord->first,coord->second,vida);
+void Embarcacao::set_corpo(int pos, int x, int y, int vida) {
+    corpo[pos] = new Unidade(x,y,vida);
 }
 
 Unidade * Embarcacao::get_corpo(int pos) {
