@@ -13,8 +13,8 @@ Submarino::~Submarino() = default;
 void Submarino::defender(int x, int y) {
     bool posx0 = get_corpo(0)->get_coordenadas().first == x;
     bool posy0 = get_corpo(0)->get_coordenadas().first == y;
-    bool posx1 = get_corpo(0)->get_coordenadas().first == x;
-    bool posy1 = get_corpo(0)->get_coordenadas().first == y;
+    bool posx1 = get_corpo(1)->get_coordenadas().first == x;
+    bool posy1 = get_corpo(1)->get_coordenadas().first == y;
     if(posx0 && posy0){
         get_corpo(0)->soma_vida(-1);
     }else if(posx1 && posy1){
