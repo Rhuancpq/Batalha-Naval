@@ -6,10 +6,11 @@
 
 using namespace std;
 
-Unidade::Unidade(int x, int y, int vida) {
+Unidade::Unidade(int x, int y, int vida, char selo) {
     coordenadas.first = x;
     coordenadas.second = y;
     this->vida = vida;
+    this->selo = selo;
 }
 
 Unidade::~Unidade() = default;
@@ -33,4 +34,20 @@ int Unidade::get_vida(){
 
 pair<int, int> Unidade::get_coordenadas() {
     return coordenadas;
+}
+
+void Unidade::torna_visivel() {
+    visibilidade = true;
+}
+
+void Unidade::set_selo(char selo) {
+    this->selo = selo;
+}
+
+char Unidade::get_selo() {
+    return selo;
+}
+
+bool Unidade::get_visibilidade() {
+    return visibilidade;
 }

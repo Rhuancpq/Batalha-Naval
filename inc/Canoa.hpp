@@ -8,7 +8,11 @@
 #include "Embarcacao.hpp"
 
 class Canoa : public Embarcacao{
+private:
+    Canoa();
 public:
+    ~Canoa();
+    Canoa(int x, int y);
     void defender() override;
 };
 
