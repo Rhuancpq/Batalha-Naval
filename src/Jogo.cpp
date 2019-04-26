@@ -176,3 +176,15 @@ bool Jogo::condicao_de_vit() { //Retorna falso se tiver ao menos uma embarcaçã
     }
     return !vivo;
 }
+
+void Jogo::atacar(int x, int y) {
+    if(!(Mapa[x][y].first)){
+        cout<<"Você errou o ataque"<<endl;
+    }else{
+        Mapa[x][y].second->defender(x,y);
+    }
+}
+
+void Jogo::limpar() {
+    cout << "\033[2J\033[1;1H";
+}

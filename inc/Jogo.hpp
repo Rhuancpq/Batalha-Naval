@@ -20,8 +20,10 @@ public:
     Jogo(const string &jogador, const string &mapa);
     void pre_inicializar();
     void imprimir();
+    void limpar();
     bool condicao_de_vit();
     ~Jogo();
+    void atacar(int x, int y);
 };
 
 #endif //EP1_JOGO_HPP

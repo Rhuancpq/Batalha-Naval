@@ -2,6 +2,7 @@
 // Created by rhuan on 15/04/19.
 //
 #include "Submarino.hpp"
+#include "Embarcacao.hpp"
 
 Submarino::Submarino(int x0, int y0, int x1, int y1) {
     set_corpo(0,x0,y0,2,'P');

@@ -16,7 +16,7 @@ private:
     bool visivel = false;
     bool vivo = false;
 public:
-    virtual ~Embarcacao() = 0;
+    virtual ~Embarcacao();
     void set_corpo(int pos, int x, int y, int vida, char selo);
     Unidade * get_corpo(int pos);
     virtual void defender(int x, int y) = 0;
