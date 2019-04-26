@@ -165,7 +165,9 @@ void Jogo::imprimir() {
 
 void Jogo::pre_inicializar() {
     for(auto x : Mapa){
-        x->first = false;
+        for (int i = 0; i < 13; ++i) {
+            x[i].first = false;
+        }
     }
 }
 
