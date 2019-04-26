@@ -3,7 +3,7 @@
 //
 #include "Canoa.hpp"
 
-void Canoa::defender() {
+void Canoa::defender(int x, int y) {
     get_corpo(0)->soma_vida(-1);
     get_corpo(0)->torna_visivel();
 }

@@ -13,7 +13,7 @@ private:
 public:
     ~Canoa();
     Canoa(int x, int y);
-    void defender() override;
+    void defender(int x, int y) override;
 };
 
 #endif //EP1_CANOA_HPP

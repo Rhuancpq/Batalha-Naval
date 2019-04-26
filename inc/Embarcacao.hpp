@@ -17,7 +17,7 @@ private:
 public:
     void set_corpo(int pos, int x, int y, int vida, char selo);
     Unidade * get_corpo(int pos);
-    virtual void defender() = 0;
+    virtual void defender(int x, int y) = 0;
 };
 
 #endif //EP1_EMBARCACAO_HPP
