@@ -9,8 +9,9 @@
 class Submarino : public Embarcacao{
 public:
     Submarino(int x0, int y0, int x1, int y1);
-    ~Submarino();
-    void defender(int x, int y);
+    ~Submarino() override ;
+    void defender(int x, int y) override;
+    bool get_vivo()override;
 };
 
 #endif //EP1_SUBMARINO_HPP

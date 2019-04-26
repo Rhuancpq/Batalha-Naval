@@ -16,6 +16,12 @@ Porta_avioes::Porta_avioes(int x0, int y0, int x1, int y1, int x2, int y2, int x
 
 Porta_avioes::~Porta_avioes() = default;
 
+bool Porta_avioes::get_vivo() {
+    bool a = get_corpo(0)->get_vida()>0 && get_corpo(1)->get_vida() > 0;
+    bool b = get_corpo(2)->get_vida()>0 && get_corpo(3)->get_vida() > 0;
+    return a&&b;
+}
+
 void Porta_avioes::defender(int x, int y) {
     srand(x*y);
     if(rand()%2){

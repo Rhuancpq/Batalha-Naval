@@ -1,7 +1,7 @@
 //
 // Created by rhuan on 23/04/19.
 //
-#include "Mapa.hpp"
+#include "Jogo.hpp"
 #include "Embarcacao.hpp"
 #include "Canoa.hpp"
 #include "Porta_avioes.hpp"
@@ -13,9 +13,10 @@
 
 using namespace std;
 
-Mapa::Mapa(const string &jogador) {
+Jogo::Jogo(const string &jogador, const string &mapa) {
+    pre_inicializar();
     fstream file;
-    file.open("map_1.txt");
+    file.open(mapa);
     string buff;
     while(true){
         getline(file,buff);
@@ -35,11 +36,12 @@ Mapa::Mapa(const string &jogador) {
         f<<buff;
         f>>x>>y>>tipo>>orientacao;
         if(tipo == "canoa"){
-            carta[x][y].first = true;
-            carta[x][y].second = new Canoa(x,y);
+            Mapa[x][y].first = true;
+            Mapa[x][y].second = new Canoa(x,y);
+            Embarcacoes.push_back(Mapa[x][y].second);
             posicao_unidades[x][y] = 0;
         }else if(tipo == "submarino"){
-            carta[x][y].first = true;
+            Mapa[x][y].first = true;
             int x1,y1;
             if(orientacao == "direita"){
                 x1 = x;
@@ -57,13 +59,14 @@ Mapa::Mapa(const string &jogador) {
                 x1 = 15;
                 y1 = 15;
             }
-            carta[x][y].second = new Submarino(x,y,x1,y1);
-            carta[x1][y1].second = new Submarino(x,y,x1,y1);
-            carta[x1][y1].first = true;
+            Mapa[x][y].second = new Submarino(x,y,x1,y1);
+            Mapa[x1][y1].second = Mapa[x][y].second;
+            Embarcacoes.push_back(Mapa[x][y].second);
+            Mapa[x1][y1].first = true;
             posicao_unidades[x][y] = 0;
             posicao_unidades[x1][y1] = 1;
         }else if(tipo == "porta-avioes"){
-            carta[x][y].first = true;
+            Mapa[x][y].first = true;
             int x0,x1,x2,x3,y0,y1,y2,y3;
             if(orientacao == "direita"){
                 x0 = x1 = x2 = x3 =x;
@@ -96,13 +99,14 @@ Mapa::Mapa(const string &jogador) {
                 x2 = 15;
                 x3 = 15;
             }
-            carta[x0][y0].second = new Porta_avioes(x0,y0,x1,y1,x2,y2,x3,y3);
-            carta[x1][y1].second = new Porta_avioes(x0,y0,x1,y1,x2,y2,x3,y3);
-            carta[x2][y2].second = new Porta_avioes(x0,y0,x1,y1,x2,y2,x3,y3);
-            carta[x3][y3].second = new Porta_avioes(x0,y0,x1,y1,x2,y2,x3,y3);
-            carta[x1][y1].first = true;
-            carta[x2][y2].first = true;
-            carta[x3][y3].first = true;
+            Mapa[x0][y0].second = new Porta_avioes(x0,y0,x1,y1,x2,y2,x3,y3);
+            Mapa[x1][y1].second = Mapa[x0][y0].second;
+            Mapa[x2][y2].second = Mapa[x0][y0].second;
+            Mapa[x3][y3].second = Mapa[x0][y0].second;
+            Embarcacoes.push_back(Mapa[x0][y0].second);
+            Mapa[x1][y1].first = true;
+            Mapa[x2][y2].first = true;
+            Mapa[x3][y3].first = true;
             posicao_unidades[x0][y0] = 0;
             posicao_unidades[x1][y1] = 1;
             posicao_unidades[x2][y2] = 2;
@@ -111,11 +115,16 @@ Mapa::Mapa(const string &jogador) {
     }
 }
 
-Mapa::Mapa() = default;
+Jogo::Jogo() = default;
 
-Mapa::~Mapa() = default;
+Jogo::~Jogo() {
+    for (auto x:Embarcacoes){
+        delete x;
+    }
+    Embarcacoes.clear();
+}
 
-void Mapa::imprimir() {
+void Jogo::imprimir() {
     cout<<"~~~A~~~B~~~C~~~D~~~E~~~F~~~"<<
         "G~~~H~~~I~~~J~~~K~~~L~~~M~~"<<endl;
     for (int i = 1; i <= 13; ++i) {
@@ -134,12 +143,12 @@ void Mapa::imprimir() {
                         cout<<"   |";
                         break;
                     case 1: {
-                        if(!carta[i][k].first) {
+                        if(!Mapa[i][k].first) {
                             cout <<"   |";
                         }else{
                             cout<<" ";
-                            if(carta[i][k].second->get_corpo(posicao_unidades[i][k])->get_visibilidade()){
-                                cout<<carta[i][k].second->get_corpo(posicao_unidades[i][k])->get_selo()<<" |";
+                            if(Mapa[i][k].second->get_corpo(posicao_unidades[i][k])->get_visibilidade()){
+                                cout<<Mapa[i][k].second->get_corpo(posicao_unidades[i][k])->get_selo()<<" |";
                             }
                         }
                         break;
@@ -152,4 +161,18 @@ void Mapa::imprimir() {
             cout<<endl;
         }
     }
+}
+
+void Jogo::pre_inicializar() {
+    for(auto x : Mapa){
+        x->first = false;
+    }
+}
+
+bool Jogo::condicao_de_vit() { //Retorna falso se tiver ao menos uma embarcação viva
+    bool vivo = false;
+    for(auto x : Embarcacoes){
+        vivo = vivo||(x->get_vivo());
+    }
+    return !vivo;
 }

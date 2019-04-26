@@ -10,6 +10,10 @@ Submarino::Submarino(int x0, int y0, int x1, int y1) {
 
 Submarino::~Submarino() = default;
 
+bool Submarino::get_vivo() {
+    return get_corpo(0)->get_vida()>0 && get_corpo(1)->get_vida() > 0;
+}
+
 void Submarino::defender(int x, int y) {
     bool pos_x0 = get_corpo(0)->get_coordenadas().first == x;
     bool pos_y0 = get_corpo(0)->get_coordenadas().first == y;

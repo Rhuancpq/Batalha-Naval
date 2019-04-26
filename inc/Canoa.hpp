@@ -11,9 +11,10 @@ class Canoa : public Embarcacao{
 private:
     Canoa();
 public:
-    ~Canoa();
+    ~Canoa() override;
     Canoa(int x, int y);
     void defender(int x, int y) override;
+    bool get_vivo() override;
 };
 
 #endif //EP1_CANOA_HPP

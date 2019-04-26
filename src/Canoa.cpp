@@ -13,3 +13,7 @@ Canoa::Canoa(int x, int y) {
 }
 
 Canoa::~Canoa() = default;
+
+bool Canoa::get_vivo() {
+    return get_corpo(0)->get_vida() > 0;
+}
