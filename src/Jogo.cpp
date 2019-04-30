@@ -15,12 +15,12 @@ using namespace std;
 
 Jogo::Jogo(const string &jogador, const string &mapa) {
     pre_inicializar();
+    this->jogador = jogador;
     fstream file;
     file.open(mapa);
     string buff;
     while(true){
         getline(file,buff);
-        cout<<buff<<endl;
         if(buff == jogador) break;
     }
     while(true){
@@ -125,9 +125,10 @@ Jogo::~Jogo() {
 }
 
 void Jogo::imprimir() {
+    cout<<"Mapa do "<<jogador<<endl;
     cout<<"~~~A~~~B~~~C~~~D~~~E~~~F~~~"<<
         "G~~~H~~~I~~~J~~~K~~~L~~~M~~"<<endl;
-    for (int i = 1; i <= 13; ++i) {
+    for (int i = 0; i < 13; ++i) {
         for (int j = 0; j < 3; ++j) {
             for (int k = 0; k < 13; ++k) {
                 if(k == 0 && j%4 == 1){
@@ -149,6 +150,8 @@ void Jogo::imprimir() {
                             cout<<" ";
                             if(Mapa[i][k].second->get_corpo(posicao_unidades[i][k])->get_visibilidade()){
                                 cout<<Mapa[i][k].second->get_corpo(posicao_unidades[i][k])->get_selo()<<" |";
+                            }else{
+                                cout <<"  |";
                             }
                         }
                         break;

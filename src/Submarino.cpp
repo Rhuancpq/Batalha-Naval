@@ -1,6 +1,7 @@
 //
 // Created by rhuan on 15/04/19.
 //
+#include <iostream>
 #include "Submarino.hpp"
 #include "Embarcacao.hpp"
 
@@ -16,13 +17,24 @@ bool Submarino::get_vivo() {
 }
 
 void Submarino::defender(int x, int y) {
+    cout<<"Você atacou um submarino"<<endl;
     bool pos_x0 = get_corpo(0)->get_coordenadas().first == x;
     bool pos_y0 = get_corpo(0)->get_coordenadas().first == y;
     bool pos_x1 = get_corpo(1)->get_coordenadas().first == x;
     bool pos_y1 = get_corpo(1)->get_coordenadas().first == y;
     if(pos_x0 && pos_y0){
         get_corpo(0)->soma_vida(-1);
+        get_corpo(0)->torna_visivel();
+        if(get_corpo(0)->get_vida() <= 0){
+            get_corpo(0)->set_selo('X');
+            cout<<"Você destruiu um submarino"<<endl;
+        }
     }else if(pos_x1 && pos_y1){
         get_corpo(1)->soma_vida(-1);
+        get_corpo(1)->torna_visivel();
+        if(get_corpo(1)->get_vida() <= 0){
+            get_corpo(1)->set_selo('X');
+            cout<<"Você destruiu um submarino"<<endl;
+        }
     }
 }

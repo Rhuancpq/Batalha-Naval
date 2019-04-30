@@ -25,6 +25,7 @@ bool Porta_avioes::get_vivo() {
 void Porta_avioes::defender(int x, int y) {
     srand(x*y);
     if(rand()%2){
+        cout<<"Você atacou um porta aviões"<<endl;
         bool pos_x0 = get_corpo(0)->get_coordenadas().first == x;
         bool pos_y0 = get_corpo(0)->get_coordenadas().first == y;
         bool pos_x1 = get_corpo(1)->get_coordenadas().first == x;
@@ -35,12 +36,32 @@ void Porta_avioes::defender(int x, int y) {
         bool pos_y3 = get_corpo(3)->get_coordenadas().first == y;
         if(pos_x0 && pos_y0){
             get_corpo(0)->soma_vida(-1);
+            get_corpo(0)->torna_visivel();
+            if(get_corpo(0)->get_vida() <= 0){
+                get_corpo(0)->set_selo('X');
+                cout<<"Você destruiu uma unidade de um porta aviões"<<endl;
+            }
         }else if(pos_x1 && pos_y1){
             get_corpo(1)->soma_vida(-1);
+            get_corpo(1)->torna_visivel();
+            if(get_corpo(1)->get_vida() <= 0){
+                get_corpo(1)->set_selo('X');
+                cout<<"Você destruiu uma unidade de um porta aviões"<<endl;
+            }
         }else if(pos_x2 && pos_y2){
             get_corpo(2)->soma_vida(-1);
+            get_corpo(2)->torna_visivel();
+            if(get_corpo(2)->get_vida() <= 0){
+                get_corpo(2)->set_selo('X');
+                cout<<"Você destruiu uma unidade de um porta aviões"<<endl;
+            }
         }else if(pos_x3 && pos_y3){
             get_corpo(3)->soma_vida(-1);
+            get_corpo(3)->torna_visivel();
+            if(get_corpo(3)->get_vida() <= 0){
+                get_corpo(3)->set_selo('X');
+                cout<<"Você destruiu uma unidade de um porta aviões"<<endl;
+            }
         }
     }else{
         cout<<"Um Porta Aviões desviou do seu ataque"<<endl;

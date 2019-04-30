@@ -15,6 +15,7 @@ private:
     vector<Embarcacao*> Embarcacoes;
     pair<bool, Embarcacao*> Mapa[13][13];
     int posicao_unidades[13][13] = {};
+    string jogador;
     Jogo();
 public:
     Jogo(const string &jogador, const string &mapa);
