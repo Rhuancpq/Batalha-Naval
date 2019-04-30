@@ -18,6 +18,10 @@ Jogo::Jogo(const string &jogador, const string &mapa) {
     this->jogador = jogador;
     fstream file;
     file.open(mapa);
+    if(file.fail()){
+        string a = "../"+mapa;
+        file.open(a);
+    }
     string buff;
     while(true){
         getline(file,buff);
@@ -183,11 +187,14 @@ bool Jogo::condicao_de_vit() { //Retorna falso se tiver ao menos uma embarcaçã
 }
 
 void Jogo::atacar(int x, int y) {
-    if(!(Mapa[x][y].first)){
+    if(Mapa[x][y].second->get_corpo(posicao_unidades[x][y])->get_vida()<=0){
+        cout<<"Você já atacou nessa posição"<<endl;
+    }else if(!(Mapa[x][y].first)){
         cout<<"Você errou o ataque"<<endl;
     }else{
         Mapa[x][y].second->defender(x,y);
     }
+
 }
 
 void Jogo::limpar() {

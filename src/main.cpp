@@ -7,7 +7,7 @@
 using namespace std;
 
 int main(int argc, char ** argv){
-    string path = "../doc/map_";
+    string path = "doc/map_";
     int d;
     cout<<"Bem vindo ao Batalha Naval"<<endl;
     cout<<"Você pode escolher um entre três mapas para jogar..."<<endl;
