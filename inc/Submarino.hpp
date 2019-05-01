@@ -7,6 +7,8 @@
 #include "Embarcacao.hpp"
 
 class Submarino : public Embarcacao{
+private:
+    Submarino() = default;
 public:
     Submarino(int x0, int y0, int x1, int y1);
     ~Submarino() override ;

@@ -16,6 +16,7 @@ private:
     int vida;
     bool visibilidade = false;
     char selo;
+    Unidade() = default;
 public:
     Unidade(int x, int y, int vida, char selo);
     ~Unidade();

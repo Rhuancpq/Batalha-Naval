@@ -188,7 +188,7 @@ bool Jogo::condicao_de_vit() { //Retorna falso se tiver ao menos uma embarcaçã
 
 void Jogo::atacar(int x, int y) {
     if(Mapa[x][y].second->get_corpo(posicao_unidades[x][y])->get_vida()<=0){
-        cout<<"Você já atacou nessa posição"<<endl;
+        cout<<"Você já destruiu uma unidade nessa posição"<<endl;
     }else if(!(Mapa[x][y].first)){
         cout<<"Você errou o ataque"<<endl;
     }else{

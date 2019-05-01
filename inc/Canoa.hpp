@@ -9,7 +9,7 @@
 
 class Canoa : public Embarcacao{
 private:
-    Canoa();
+    Canoa() = default;
 public:
     ~Canoa() override;
     Canoa(int x, int y);
