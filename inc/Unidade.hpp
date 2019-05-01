@@ -7,6 +7,7 @@
 
 #include <utility>
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -15,10 +16,10 @@ private:
     pair<int, int> coordenadas;
     int vida;
     bool visibilidade = false;
-    char selo;
+    string selo;
     Unidade() = default;
 public:
-    Unidade(int x, int y, int vida, char selo);
+    Unidade(int x, int y, int vida, string& selo);
     ~Unidade();
     void set_coordenadas(int x, int y);
     void set_vida(int vida);
@@ -27,8 +28,8 @@ public:
     pair<int, int> get_coordenadas();
     void torna_visivel();
     bool get_visibilidade();
-    void set_selo(char selo);
-    char get_selo();
+    void set_selo(string& selo);
+    string get_selo();
 };
 
 #endif //EP1_UNIDADE_HPP

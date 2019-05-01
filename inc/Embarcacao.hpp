@@ -17,7 +17,7 @@ private:
     bool vivo = false;
 public:
     virtual ~Embarcacao();
-    void set_corpo(int pos, int x, int y, int vida, char selo);
+    void set_corpo(int pos, int x, int y, int vida, string selo);
     Unidade * get_corpo(int pos);
     virtual void defender(int x, int y) = 0;
     virtual bool get_vivo() = 0;

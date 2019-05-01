@@ -6,7 +6,7 @@
 
 Embarcacao::~Embarcacao() = default;
 
-void Embarcacao::set_corpo(int pos, int x, int y, int vida,char selo) {
+void Embarcacao::set_corpo(int pos, int x, int y, int vida,string selo) {
     corpo[pos] = new Unidade(x,y,vida,selo);
 }
 

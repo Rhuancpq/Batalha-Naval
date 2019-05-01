@@ -10,6 +10,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <Excecao.hpp>
 
 using namespace std;
 
@@ -21,6 +22,7 @@ Jogo::Jogo(const string &jogador, const string &mapa) {
     if(file.fail()){
         string a = "../"+mapa;
         file.open(a);
+        if(file.fail()) throw new Excecao("Arquivo não encontrado");
     }
     string buff;
     while(true){
@@ -129,39 +131,46 @@ Jogo::~Jogo() {
 }
 
 void Jogo::imprimir() {
-    cout<<"Mapa do "<<jogador<<endl;
-    cout<<"~~~A~~~B~~~C~~~D~~~E~~~F~~~"<<
-        "G~~~H~~~I~~~J~~~K~~~L~~~M~~"<<endl;
+    string branco,azul,clear;
+    branco = "\033[39;48;5;18m";
+    azul = "\033[96;48;5;18m";
+    clear = "\033[0m";
+    cout<<"\033[5m                 Mapa do "<<jogador<<clear<<endl;
+    for(char a = 'A'; a <= 'M'; a++){
+        cout<<azul<<"~~~"<<clear;
+        cout<<branco<<a<<clear;
+    }
     for (int i = 0; i < 13; ++i) {
         for (int j = 0; j < 3; ++j) {
             for (int k = 0; k < 13; ++k) {
                 if(k == 0 && j%4 == 1){
-                    if(i < 10) cout<<" ";
-                    cout<<i;
+                    if(i < 10) cout<<azul<<" "<<clear;
+                    cout<<branco<<i<<clear;
                 }else if(k == 0 && j%3 == 2){
-                    cout<<"~~";
+                    cout<<azul<<"~~"<<clear;
                 }else if(k == 0 && j%3 == 0){
-                    cout<<" |";
+                    cout<<azul<<" |"<<clear;
                 }
                 switch (j%3){
                     case 0:
-                        cout<<"   |";
+                        cout<<azul<<"   |"<<clear;
                         break;
                     case 1: {
                         if(!Mapa[i][k].first) {
-                            cout <<"   |";
+                            cout<<azul<<"   |"<<clear;
                         }else{
                             cout<<" ";
                             if(Mapa[i][k].second->get_corpo(posicao_unidades[i][k])->get_visibilidade()){
-                                cout<<Mapa[i][k].second->get_corpo(posicao_unidades[i][k])->get_selo()<<" |";
+                                cout<<Mapa[i][k].second->get_corpo(posicao_unidades[i][k])->get_selo()<<
+                                azul<<" |"<<clear;
                             }else{
-                                cout <<"  |";
+                                cout<<azul<<"  |"<<clear;
                             }
                         }
                         break;
                     }
                     case 2:
-                        cout<<"~~~~";
+                        cout<<azul<<"~~~~"<<clear;
                         break;
                 }
             }

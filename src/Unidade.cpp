@@ -6,7 +6,7 @@
 
 using namespace std;
 
-Unidade::Unidade(int x, int y, int vida, char selo) {
+Unidade::Unidade(int x, int y, int vida, string& selo) {
     coordenadas.first = x;
     coordenadas.second = y;
     this->vida = vida;
@@ -40,11 +40,11 @@ void Unidade::torna_visivel() {
     visibilidade = true;
 }
 
-void Unidade::set_selo(char selo) {
+void Unidade::set_selo(string& selo) {
     this->selo = selo;
 }
 
-char Unidade::get_selo() {
+string Unidade::get_selo() {
     return selo;
 }
 

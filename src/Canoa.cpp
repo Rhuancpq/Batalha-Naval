@@ -11,7 +11,8 @@ void Canoa::defender(int x, int y) {
 }
 
 Canoa::Canoa(int x, int y) {
-    set_corpo(0,x,y,1,'X');
+    string t = "\033[5;91;48;5;18mX";
+    set_corpo(0,x,y,1,t);
 }
 
 Canoa::~Canoa() = default;
