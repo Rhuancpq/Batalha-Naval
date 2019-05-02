@@ -140,6 +140,7 @@ void Jogo::imprimir() {
         cout<<azul<<"~~~"<<clear;
         cout<<branco<<a<<clear;
     }
+    cout<<azul<<"~~"<<clear<<endl;
     for (int i = 0; i < 13; ++i) {
         for (int j = 0; j < 3; ++j) {
             for (int k = 0; k < 13; ++k) {
@@ -159,7 +160,7 @@ void Jogo::imprimir() {
                         if(!Mapa[i][k].first) {
                             cout<<azul<<"   |"<<clear;
                         }else{
-                            cout<<" ";
+                            cout<<azul<<" "<<clear;
                             if(Mapa[i][k].second->get_corpo(posicao_unidades[i][k])->get_visibilidade()){
                                 cout<<Mapa[i][k].second->get_corpo(posicao_unidades[i][k])->get_selo()<<
                                 azul<<" |"<<clear;
@@ -196,12 +197,14 @@ bool Jogo::condicao_de_vit() { //Retorna falso se tiver ao menos uma embarcaçã
 }
 
 void Jogo::atacar(int x, int y) {
-    if(Mapa[x][y].second->get_corpo(posicao_unidades[x][y])->get_vida()<=0){
-        cout<<"Você já destruiu uma unidade nessa posição"<<endl;
-    }else if(!(Mapa[x][y].first)){
-        cout<<"Você errou o ataque"<<endl;
+    if(!(Mapa[x][y].first)){
+        cout<<"Você errou o ataque!!"<<endl;
     }else{
-        Mapa[x][y].second->defender(x,y);
+        if(Mapa[x][y].second->get_corpo(posicao_unidades[x][y])->get_vida()<=0) {
+            cout << "Você já destruiu uma unidade nessa posição!!" << endl;
+        }else {
+            Mapa[x][y].second->defender(x, y);
+        }
     }
 
 }

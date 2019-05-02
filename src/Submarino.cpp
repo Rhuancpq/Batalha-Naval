@@ -6,7 +6,7 @@
 #include "Embarcacao.hpp"
 
 Submarino::Submarino(int x0, int y0, int x1, int y1) {
-    string t = "\033[92;48;5;18m";
+    string t = "\033[92;48;5;18mS";
     set_corpo(0,x0,y0,2,t);
     set_corpo(1,x1,y1,2,t);
 }

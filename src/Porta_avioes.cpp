@@ -8,7 +8,7 @@
 using namespace std;
 
 Porta_avioes::Porta_avioes(int x0, int y0, int x1, int y1, int x2, int y2, int x3, int y3) {
-    string t = "\033[94;48;5;18m";
+    string t = "\033[94;48;5;18mP";
     set_corpo(0,x0,y0,1,t);
     set_corpo(1,x1,y1,1,t);
     set_corpo(2,x2,y2,1,t);
