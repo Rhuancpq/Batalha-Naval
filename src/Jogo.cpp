@@ -27,10 +27,11 @@ Jogo::Jogo(const string &jogador, const string &mapa) {
     if(file.fail()){
         string a = "../"+mapa;
         file.open(a);
-        if(file.fail()) throw new Excecao("Arquivo não encontrado");
+        if(file.fail()) throw Excecao("Arquivo não encontrado");
     }
     string buff;
     while(true){
+        if(file.eof()) throw Excecao("Arquivo vazio ou fora dos padrões");
         getline(file,buff);
         if(buff == jogador) break;
     }

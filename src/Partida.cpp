@@ -71,16 +71,25 @@ void partida(){
     cout << "Digite 1 para escolher o mapa 1" << endl;
     cout << "Digite 2 para escolher o mapa 2" << endl;
     cout << "Digite 3 para escolher o mapa 3" << endl;
+    cout << "Digite 4 para escolher um mapa diferente" << endl;
     while(true) {
         d = getInput<int>();
-        if (d >= 1 && d <= 3) {
+        if (d >= 1 && d <= 4) {
             break;
         }else{
             cout<<"Entrada inválida, insira novamente:"<<endl;
         }
     }
-    char t = d + '0';
-    path = path + t + ".txt";
+    if(d == 4){
+        cout<<"Digite o nome e a extensão do arquivo"<<endl;
+        string nome_do_arquivo;
+        nome_do_arquivo = getInput<string>();
+        path = "doc/";
+        path = path + nome_do_arquivo;
+    }else {
+        char t = d + '0';
+        path = path + t + ".txt";
+    }
     cout << "Então vamos começar a partida..." << endl;
     Jogo *player_1 = new Jogo("# player_1", path);
     Jogo *player_2 = new Jogo("# player_2", path);

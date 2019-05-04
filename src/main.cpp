@@ -16,9 +16,9 @@ int main(int argc, char ** argv) {
         }
         return 0;
     }catch(Excecao &e){
-        cout<< "Exceção capturada: "<<e.what()<<endl;
+        cerr<< "Exceção capturada: "<<e.what()<<endl;
     }catch(exception &e){
-        cout<< "Exception: "<<e.what()<<endl;
+        cerr<< "Exception: "<<e.what()<<endl;
     }
 }
 
