@@ -13,8 +13,6 @@ using namespace std;
 class Embarcacao{
 private:
     Unidade * corpo[4] = {};
-    bool visivel = false;
-    bool vivo = false;
 public:
     virtual ~Embarcacao();
     void set_corpo(int pos, int x, int y, int vida, string selo);

@@ -9,6 +9,7 @@ using namespace std;
 Unidade::Unidade(int x, int y, int vida, string& selo) {
     coordenadas.first = x;
     coordenadas.second = y;
+    visibilidade = false;
     this->vida = vida;
     this->selo = selo;
 }

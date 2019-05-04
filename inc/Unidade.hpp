@@ -15,7 +15,7 @@ class Unidade{
 private:
     pair<int, int> coordenadas;
     int vida;
-    bool visibilidade = false;
+    bool visibilidade;
     string selo;
     Unidade() = default;
 public:

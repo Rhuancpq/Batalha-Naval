@@ -15,7 +15,9 @@ Canoa::Canoa(int x, int y) {
     set_corpo(0,x,y,1,t);
 }
 
-Canoa::~Canoa() = default;
+Canoa::~Canoa(){
+    delete get_corpo(0);
+}
 
 bool Canoa::get_vivo() {
     return get_corpo(0)->get_vida() > 0;

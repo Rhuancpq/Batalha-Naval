@@ -12,6 +12,10 @@
 #include <string>
 #include <Excecao.hpp>
 
+#define branco "\033[39;48;5;18m"
+#define azul "\033[96;48;5;18m"
+#define preto "\033[0m"
+
 using namespace std;
 
 Jogo::Jogo(const string &jogador, const string &mapa) {
@@ -119,6 +123,7 @@ Jogo::Jogo(const string &jogador, const string &mapa) {
             posicao_unidades[x3][y3] = 3;
         }
     }
+    file.close();
 }
 
 Jogo::Jogo() = default;
@@ -127,51 +132,46 @@ Jogo::~Jogo() {
     for (auto x:Embarcacoes){
         delete x;
     }
-    Embarcacoes.clear();
 }
 
 void Jogo::imprimir() {
-    string branco,azul,clear;
-    branco = "\033[39;48;5;18m";
-    azul = "\033[96;48;5;18m";
-    clear = "\033[0m";
-    cout<<"\033[5m                 Mapa do "<<jogador<<clear<<endl;
-    for(char a = 'A'; a <= 'M'; a++){
-        cout<<azul<<"~~~"<<clear;
-        cout<<branco<<a<<clear;
+    cout<<"\033[5m                 Mapa do "<<jogador<<preto<<endl;
+    for(int a = 0; a < 13; a++){
+        cout<<azul<<"~~~"<<preto;
+        cout<<branco<<a<<preto;
     }
-    cout<<azul<<"~~"<<clear<<endl;
+    cout<<azul<<"~~"<<preto<<endl;
     for (int i = 0; i < 13; ++i) {
         for (int j = 0; j < 3; ++j) {
             for (int k = 0; k < 13; ++k) {
                 if(k == 0 && j%4 == 1){
-                    if(i < 10) cout<<azul<<" "<<clear;
-                    cout<<branco<<i<<clear;
+                    if(i < 10) cout<<azul<<" "<<preto;
+                    cout<<branco<<i<<preto;
                 }else if(k == 0 && j%3 == 2){
-                    cout<<azul<<"~~"<<clear;
+                    cout<<azul<<"~~"<<preto;
                 }else if(k == 0 && j%3 == 0){
-                    cout<<azul<<" |"<<clear;
+                    cout<<azul<<" |"<<preto;
                 }
                 switch (j%3){
                     case 0:
-                        cout<<azul<<"   |"<<clear;
+                        cout<<azul<<"   |"<<preto;
                         break;
                     case 1: {
                         if(!Mapa[i][k].first) {
-                            cout<<azul<<"   |"<<clear;
+                            cout<<azul<<"   |"<<preto;
                         }else{
-                            cout<<azul<<" "<<clear;
+                            cout<<azul<<" "<<preto;
                             if(Mapa[i][k].second->get_corpo(posicao_unidades[i][k])->get_visibilidade()){
                                 cout<<Mapa[i][k].second->get_corpo(posicao_unidades[i][k])->get_selo()<<
-                                azul<<" |"<<clear;
+                                azul<<" |"<<preto;
                             }else{
-                                cout<<azul<<"  |"<<clear;
+                                cout<<azul<<"  |"<<preto;
                             }
                         }
                         break;
                     }
                     case 2:
-                        cout<<azul<<"~~~~"<<clear;
+                        cout<<azul<<"~~~~"<<preto;
                         break;
                 }
             }
@@ -209,6 +209,6 @@ void Jogo::atacar(int x, int y) {
 
 }
 
-void Jogo::limpar() {
+void Jogo::limpar(){
     cout << "\033[2J\033[1;1H";
 }

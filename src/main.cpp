@@ -9,10 +9,12 @@ int main(int argc, char ** argv) {
     try {
         while(true){
             partida();
-            if(!jogar_novamente()){
+            bool j = jogar_novamente();
+            if(!j){
                 break;
             }
         }
+        return 0;
     }catch(Excecao &e){
         cout<< "Exceção capturada: "<<e.what()<<endl;
     }catch(exception &e){
