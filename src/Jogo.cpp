@@ -11,6 +11,7 @@
 #include <sstream>
 #include <string>
 #include <Excecao.hpp>
+#include <random>
 
 #define branco "\033[39;48;5;18m"
 #define azul "\033[96;48;5;18m"
@@ -158,7 +159,11 @@ void Jogo::imprimir() {
                         break;
                     case 1: {
                         if(!Mapa[i][k].first) {
-                            cout<<azul<<"   |"<<preto;
+                            if(disparos[i][k]){
+                                cout << azul << " ~ |" << preto;
+                            }else {
+                                cout << azul << "   |" << preto;
+                            }
                         }else{
                             cout<<azul<<" "<<preto;
                             if(Mapa[i][k].second->get_corpo(posicao_unidades[i][k])->get_visibilidade()){
@@ -186,6 +191,11 @@ void Jogo::pre_inicializar() {
             x[i].first = false;
         }
     }
+    for(auto x : disparos){
+        for (int i = 0; i < 13; ++i) {
+            x[i] = false;
+        }
+    }
 }
 
 bool Jogo::condicao_de_vit() { //Retorna falso se tiver ao menos uma embarcação viva
@@ -199,6 +209,7 @@ bool Jogo::condicao_de_vit() { //Retorna falso se tiver ao menos uma embarcaçã
 void Jogo::atacar(int x, int y) {
     if(!(Mapa[x][y].first)){
         cout<<"Você errou o ataque!!"<<endl;
+        disparos[x][y] = true;
     }else{
         if(Mapa[x][y].second->get_corpo(posicao_unidades[x][y])->get_vida()<=0) {
             cout << "Você já destruiu uma unidade nessa posição!!" << endl;
@@ -209,6 +220,52 @@ void Jogo::atacar(int x, int y) {
 
 }
 
-void Jogo::limpar(){
-    cout << "\033[2J\033[1;1H";
+void Jogo::bombardeio(int x, int y) {
+    int rand[8] = {}, cont = 0;
+    random_device rd;
+    mt19937 mt(rd());
+    uniform_int_distribution<> dist(0, 12);
+    for (auto& i : rand) {
+        i = dist(mt);
+    }
+    cout<<"Bombardeio começou"<<endl;
+    cout<<"Coordenadas recebidas"<<endl;
+    cout<<"Efetuando ataque..."<<endl;
+    atacar(x,y);
+    cout<<"Disparando mísseis extras..."<<endl;
+    for (int j = 0; j < 8; j += 2) {
+        int x_temp = rand[j], y_temp = rand[j+1];
+        cout<<"Nas coordenadas ("<<x_temp<<","<<y_temp<<")"<<endl;
+        if(!(Mapa[x_temp][y_temp].first)){
+            if((dist(mt)%12)){
+                cout<<"Míssil ao mar"<<endl;
+            }else{
+                cout<<"Alguém faz o recruta parar de fazer %&#$@*"<<endl;
+            }
+            cont++;
+            disparos[x_temp][y_temp] = true;
+        }else{
+            if(Mapa[x_temp][y_temp].second->get_corpo(posicao_unidades[x][y])->get_vida()<=0) {
+            }else {
+                Mapa[x][y].second->defender(x, y);
+            }
+        }
+    }
+    switch(cont%5){
+        case 0:
+            cout<<"Parece que a sorte esteve ao seu lado"<<endl;
+            break;
+        case 1:
+            cout<<"Uma sorte tanto média"<<endl;
+            break;
+        case 2:
+            cout<<"Uma sorte baixa, meu caro"<<endl;
+            break;
+        case 3:
+            cout<<"A um passo de quase nada"<<endl;
+            break;
+        case 4:
+            cout<<"Quem Sabe da próxima seus mísseis acertem algo"<<endl;
+            break;
+    }
 }

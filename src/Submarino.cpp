@@ -32,14 +32,14 @@ void Submarino::defender(int x, int y) {
         get_corpo(0)->torna_visivel();
         if(get_corpo(0)->get_vida() <= 0){
             get_corpo(0)->set_selo(t);
-            cout<<"Você destruiu um submarino"<<endl;
+            cout<<"Você destruiu uma unidade de um submarino"<<endl;
         }
     }else if(pos_x1 && pos_y1){
         get_corpo(1)->soma_vida(-1);
         get_corpo(1)->torna_visivel();
         if(get_corpo(1)->get_vida() <= 0){
             get_corpo(1)->set_selo(t);
-            cout<<"Você destruiu um submarino"<<endl;
+            cout<<"Você destruiu uma unidade de um submarino"<<endl;
         }
     }
 }

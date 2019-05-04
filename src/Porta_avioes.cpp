@@ -36,7 +36,7 @@ void Porta_avioes::defender(int x, int y) {
     mt19937 mt(rd());
     uniform_int_distribution<> dist(0, 1);
     if(dist(mt)){
-        cout<<"Você atacou um porta aviões"<<endl;
+        cout<<"Um porta aviões foi atacado"<<endl;
         bool pos_x0 = get_corpo(0)->get_coordenadas().first == x;
         bool pos_y0 = get_corpo(0)->get_coordenadas().second == y;
         bool pos_x1 = get_corpo(1)->get_coordenadas().first == x;
@@ -50,31 +50,31 @@ void Porta_avioes::defender(int x, int y) {
             get_corpo(0)->torna_visivel();
             if(get_corpo(0)->get_vida() <= 0){
                 get_corpo(0)->set_selo(t);
-                cout<<"Você destruiu uma unidade de um porta aviões"<<endl;
+                cout<<"Uma unidade de um porta aviões foi destruida"<<endl;
             }
         }else if(pos_x1 && pos_y1){
             get_corpo(1)->soma_vida(-1);
             get_corpo(1)->torna_visivel();
             if(get_corpo(1)->get_vida() <= 0){
                 get_corpo(1)->set_selo(t);
-                cout<<"Você destruiu uma unidade de um porta aviões"<<endl;
+                cout<<"Uma unidade de um porta aviões foi destruida"<<endl;
             }
         }else if(pos_x2 && pos_y2){
             get_corpo(2)->soma_vida(-1);
             get_corpo(2)->torna_visivel();
             if(get_corpo(2)->get_vida() <= 0){
                 get_corpo(2)->set_selo(t);
-                cout<<"Você destruiu uma unidade de um porta aviões"<<endl;
+                cout<<"Uma unidade de um porta aviões foi destruida"<<endl;
             }
         }else if(pos_x3 && pos_y3){
             get_corpo(3)->soma_vida(-1);
             get_corpo(3)->torna_visivel();
             if(get_corpo(3)->get_vida() <= 0){
                 get_corpo(3)->set_selo(t);
-                cout<<"Você destruiu uma unidade de um porta aviões"<<endl;
+                cout<<"Uma unidade de um porta aviões foi destruida"<<endl;
             }
         }
     }else{
-        cout<<"Um Porta Aviões desviou do seu ataque"<<endl;
+        cout<<"Um Porta Aviões abateu um míssil"<<endl;
     }
 }

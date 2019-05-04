@@ -48,8 +48,25 @@ bool jogar_novamente() {
 
 void partida(){
     string path = "doc/map_";
-    int d;
+    int d, m;
     cout << "Bem vindo ao Batalha Naval" << endl;
+    cout << "Escolha um modo de jogo:" << endl;
+    cout << "1. Clássico" <<endl;
+    cout << "2. Bombardeio"<<endl;
+    while(true) {
+        m = getInput<int>();
+        if (m >= 1 && m <= 2) {
+            break;
+        }else{
+            cout<<"Entrada inválida, insira novamente:"<<endl;
+        }
+    }
+    this_thread::sleep_for(chrono::seconds(2));
+    cout << "\033[2J\033[1;1H";
+    if(m==2){
+        cout<<"No modo Bombardeio, a cada 3 rodadas, "
+            <<"o próximo ataque realizado tem 4 tiros bônus e randômicos"<<endl;
+    }
     cout << "Você pode escolher um entre três mapas para jogar..." << endl;
     cout << "Digite 1 para escolher o mapa 1" << endl;
     cout << "Digite 2 para escolher o mapa 2" << endl;
@@ -68,7 +85,7 @@ void partida(){
     Jogo *player_1 = new Jogo("# player_1", path);
     Jogo *player_2 = new Jogo("# player_2", path);
     this_thread::sleep_for(chrono::seconds(2));
-    player_2->limpar();
+    cout << "\033[2J\033[1;1H";
     int i = 1;
     while (true) {
         int x, y;
@@ -87,9 +104,13 @@ void partida(){
                     cout<<"Entrada inválida, insira novamente as coordenadas:"<<endl;
                 }
             }
-            player_2->atacar(x, y);
+            if(m == 2 && i%7 == 0){
+                player_2->bombardeio(x,y);
+            }else {
+                player_2->atacar(x, y);
+            }
             this_thread::sleep_for(chrono::seconds(2));
-            player_2->limpar();
+            cout << "\033[2J\033[1;1H";
             if (player_2->condicao_de_vit()) {
                 cout << "Jogador 1 ganhou" << endl;
                 player_2->imprimir();
@@ -112,9 +133,13 @@ void partida(){
                     cout<<"Entrada inválida, insira novamente as coordenadas:"<<endl;
                 }
             }
-            player_1->atacar(x, y);
+            if(m == 2 && i%8 == 0){
+                player_1->bombardeio(x,y);
+            }else {
+                player_1->atacar(x, y);
+            }
             this_thread::sleep_for(chrono::seconds(2));
-            player_2->limpar();
+            cout << "\033[2J\033[1;1H";
             if (player_1->condicao_de_vit()) {
                 cout << "Jogador 2 ganhou" << endl;
                 player_1->imprimir();
