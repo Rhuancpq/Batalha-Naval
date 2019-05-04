@@ -61,7 +61,7 @@ void partida(){
             cout<<"Entrada inválida, insira novamente:"<<endl;
         }
     }
-    this_thread::sleep_for(chrono::seconds(2));
+    this_thread::sleep_for(chrono::seconds(1));
     cout << "\033[2J\033[1;1H";
     if(m==2){
         cout<<"No modo Bombardeio, a cada 3 rodadas, "
@@ -84,11 +84,12 @@ void partida(){
     cout << "Então vamos começar a partida..." << endl;
     Jogo *player_1 = new Jogo("# player_1", path);
     Jogo *player_2 = new Jogo("# player_2", path);
-    this_thread::sleep_for(chrono::seconds(2));
+    this_thread::sleep_for(chrono::seconds(1));
     cout << "\033[2J\033[1;1H";
     int i = 1;
     while (true) {
         int x, y;
+        if(m == 2 && i%7 == 0) cout<<"Rodada do Bombardeio"<<endl;
         if (i % 2) {
             player_2->imprimir();
             cout << "Turno do jogador 1" << endl;

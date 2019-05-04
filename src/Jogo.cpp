@@ -138,8 +138,13 @@ Jogo::~Jogo() {
 void Jogo::imprimir() {
     cout<<"\033[5m                 Mapa do "<<jogador<<preto<<endl;
     for(int a = 0; a < 13; a++){
-        cout<<azul<<"~~~"<<preto;
-        cout<<branco<<a<<preto;
+        if(a >= 10){
+            cout<<azul<<"~~"<<preto;
+            cout<<branco<<a<<preto;
+        }else {
+            cout << azul << "~~~" << preto;
+            cout << branco << a << preto;
+        }
     }
     cout<<azul<<"~~"<<preto<<endl;
     for (int i = 0; i < 13; ++i) {
@@ -228,44 +233,44 @@ void Jogo::bombardeio(int x, int y) {
     for (auto& i : rand) {
         i = dist(mt);
     }
-    cout<<"Bombardeio começou"<<endl;
-    cout<<"Coordenadas recebidas"<<endl;
+    cout<<"Bombardeio começou..."<<endl;
+    cout<<"...Coordenadas recebidas"<<endl;
     cout<<"Efetuando ataque..."<<endl;
     atacar(x,y);
     cout<<"Disparando mísseis extras..."<<endl;
     for (int j = 0; j < 8; j += 2) {
         int x_temp = rand[j], y_temp = rand[j+1];
-        cout<<"Nas coordenadas ("<<x_temp<<","<<y_temp<<")"<<endl;
+        cout<<"Na coordenada ("<<x_temp<<","<<y_temp<<")"<<endl;
         if(!(Mapa[x_temp][y_temp].first)){
             if((dist(mt)%12)){
                 cout<<"Míssil ao mar"<<endl;
             }else{
-                cout<<"Alguém faz o recruta parar de fazer %&#$@*"<<endl;
+                cout<<"Alguém ensina o recruta a atirar!!"<<endl;
             }
             cont++;
             disparos[x_temp][y_temp] = true;
         }else{
-            if(Mapa[x_temp][y_temp].second->get_corpo(posicao_unidades[x][y])->get_vida()<=0) {
+            if(Mapa[x_temp][y_temp].second->get_corpo(posicao_unidades[x_temp][y_temp])->get_vida()<=0) {
             }else {
-                Mapa[x][y].second->defender(x, y);
+                Mapa[x_temp][y_temp].second->defender(x_temp,y_temp);
             }
         }
     }
     switch(cont%5){
         case 0:
-            cout<<"Parece que a sorte esteve ao seu lado"<<endl;
+            cout<<"Parece que a sorte esteve ao seu lado!!"<<endl;
             break;
         case 1:
-            cout<<"Uma sorte tanto média"<<endl;
+            cout<<"Uma sorte tanto média!!"<<endl;
             break;
         case 2:
-            cout<<"Uma sorte baixa, meu caro"<<endl;
+            cout<<"Uma sorte baixa, meu caro!!"<<endl;
             break;
         case 3:
-            cout<<"A um passo de quase nada"<<endl;
+            cout<<"A um passo de quase nada!!"<<endl;
             break;
         case 4:
-            cout<<"Quem Sabe da próxima seus mísseis acertem algo"<<endl;
+            cout<<"Quem Sabe da próxima seus mísseis acertem algo!!"<<endl;
             break;
     }
 }
