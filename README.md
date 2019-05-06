@@ -19,7 +19,7 @@ $ git clone [Endereço SSH ou HTTPS]
 
 ## Como jogar
 
-&nbsp;&nbsp;De forma básica, a execução do projeto se faz da seguinte maneira:
+De forma básica, a execução do projeto se faz da seguinte maneira:
 
 Para construir os objetos definidos pelo projeto, juntamente com o binário para realizar a execução:
 ```
@@ -30,3 +30,28 @@ Para executar e iniciar o programa:
 ```
 $ make run
 ```
+
+## Embarcações
+
+Nesta versão as embarcações tem habilidades especiais:
+
+* Porta-Aviões:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tem 50% de chance de desviar de um míssil.
+
+* Submarino:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tem o dobro de vida (2) em suas unidades.
+
+* Canoa:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A ilustre habilidade de não ter habilidade.
+
+## Modos de Jogo
+* Clássico:
+
+Segue as mesmas regras do jogo original, Batalha naval.
+
+* Bombardeio:
+
+Neste modo mais rápido ou não dependendo da sua **sorte**, a cada 3 rodadas o próximo ataque realizado tem 4 tiros bônus adicionais e aleatórios
