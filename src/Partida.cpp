@@ -95,12 +95,14 @@ void partida(){
     Jogo *player_2 = new Jogo("# player_2", path);
     this_thread::sleep_for(chrono::seconds(1));
     cout << "\033[2J\033[1;1H";
-    int i = 1;
+    int i = 1, c = 1;
     while (true) {
         int x, y;
-        if(m == 2 && i%7 == 0) cout<<"Rodada do Bombardeio"<<endl;
         if (i % 2) {
             player_2->imprimir();
+            if(m == 2 && c%4 == 0) {
+                cout << "Rodada do Bombardeio" << endl;
+            }
             cout << "Turno do jogador 1" << endl;
             cout << "Digite as coordenadas x e y do ataque(de 0 a 12):" << endl;
             while(true) {
@@ -114,8 +116,9 @@ void partida(){
                     cout<<"Entrada inválida, insira novamente as coordenadas:"<<endl;
                 }
             }
-            if(m == 2 && i%7 == 0){
+            if(m == 2 && c%4 == 0){
                 player_2->bombardeio(x,y);
+                c = 0;
             }else {
                 player_2->atacar(x, y);
             }
@@ -128,8 +131,12 @@ void partida(){
                 delete player_2;
                 break;
             }
+            c++;
         } else {
             player_1->imprimir();
+            if(m == 2 && i%8 == 0) {
+                cout << "Rodada do Bombardeio" << endl;
+            }
             cout << "Turno do jogador 2" << endl;
             cout << "Digite as coordenadas x e y do ataque(de 0 a 12)" << endl;
             while(true) {

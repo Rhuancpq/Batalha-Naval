@@ -12,6 +12,8 @@
 #include <string>
 #include <Excecao.hpp>
 #include <random>
+#include <thread>
+#include <chrono>
 
 #define branco "\033[39;48;5;18m"
 #define azul "\033[96;48;5;18m"
@@ -174,7 +176,7 @@ void Jogo::imprimir() {
                             cout<<azul<<" "<<preto;
                             if(Mapa[i][k].second->get_corpo(posicao_unidades[i][k])->get_visibilidade()){
                                 cout<<Mapa[i][k].second->get_corpo(posicao_unidades[i][k])->get_selo()<<
-                                azul<<" |"<<preto;
+                                preto<<azul<<" |"<<preto;
                             }else{
                                 cout<<azul<<"  |"<<preto;
                             }
@@ -259,6 +261,7 @@ void Jogo::bombardeio(int x, int y) {
                 Mapa[x_temp][y_temp].second->defender(x_temp,y_temp);
             }
         }
+        this_thread::sleep_for(chrono::seconds(2));
     }
     switch(cont%5){
         case 0:
@@ -277,4 +280,5 @@ void Jogo::bombardeio(int x, int y) {
             cout<<"Quem Sabe da próxima seus mísseis acertem algo!!"<<endl;
             break;
     }
+    this_thread::sleep_for(chrono::seconds(2));
 }
