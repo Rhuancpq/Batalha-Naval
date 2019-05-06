@@ -20,6 +20,7 @@ int main(int argc, char ** argv) {
     }catch(exception &e){
         cerr<< "Exception: "<<e.what()<<endl;
     }
+    return  0;
 }
 
 
