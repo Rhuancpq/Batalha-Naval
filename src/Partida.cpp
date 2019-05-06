@@ -105,7 +105,7 @@ void partida(){
             cout << "Digite as coordenadas x e y do ataque(de 0 a 12):" << endl;
             while(true) {
                 cin>>x>>y;
-                if ((x >= 0 && x < 13 && y < 13 && y >= 0) || !cin.fail()) {
+                if ((x >= 0 && x < 13 && y < 13 && y >= 0) && !cin.fail()) {
                     cin.ignore(32767,'\n');
                     break;
                 }else{
@@ -134,7 +134,7 @@ void partida(){
             cout << "Digite as coordenadas x e y do ataque(de 0 a 12)" << endl;
             while(true) {
                 cin>>x>>y;
-                if ((x >= 0 && x < 13 && y < 13 && y >= 0) || !cin.fail()) {
+                if ((x >= 0 && x < 13 && y < 13 && y >= 0) && !cin.fail()) {
                     cin.ignore(32767,'\n');
                     break;
                 }else{
