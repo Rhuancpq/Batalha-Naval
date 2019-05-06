@@ -191,7 +191,7 @@ void Jogo::imprimir() {
     }
     cout<<"\033[92;48;5;18mS"<<preto<<" - Submarino"<<endl;
     cout << azul << "~" << preto <<" Posições em que o míssil errou o ataque, vulgo caiu na água"<<endl;
-    cout << "\033[5;91;48;5;18mX" << " - Unidades destruidas"<<endl;
+    cout << "\033[5;91;48;5;18mX" << preto <<" - Unidades destruidas"<<endl;
 }
 
 void Jogo::pre_inicializar() {
