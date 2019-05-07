@@ -134,6 +134,8 @@ void partida(){
                 player_2->imprimir(nick2);
                 cout<<"Pontuação de "<<nick1<<":"<<endl;
                 cout<<player_2->pontuacao()<<endl;
+                cout<<"Pontuação de "<<nick2<<":"<<endl;
+                cout<<player_1->pontuacao()<<endl;
                 delete player_1;
                 delete player_2;
                 break;
@@ -169,6 +171,8 @@ void partida(){
                 player_1->imprimir(nick1);
                 cout<<"Pontuação de "<<nick2<<":"<<endl;
                 cout<<player_1->pontuacao()<<endl;
+                cout<<"Pontuação de "<<nick1<<":"<<endl;
+                cout<<player_2->pontuacao()<<endl;
                 delete player_1;
                 delete player_2;
                 break;
