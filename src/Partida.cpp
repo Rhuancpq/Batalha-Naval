@@ -46,6 +46,11 @@ bool jogar_novamente() {
     return a == "S";
 }
 
+void static limpar(int time){
+    this_thread::sleep_for(chrono::seconds(time));
+    cout << "\033[2J\033[1;1H";
+}
+
 void input_coordenadas(int& x, int& y){
     while(true) {
         cin>>x>>y;
@@ -114,70 +119,63 @@ void escolher_modo_de_jogo(int& modo){
             cout<<"Entrada inválida, insira novamente:"<<endl;
         }
     }
-    this_thread::sleep_for(chrono::seconds(1));
-    cout << "\033[2J\033[1;1H";
+    limpar(1);
+}
+
+void get_nicks(string nick1, string nick2){
+    cout<<"Jogador 1, digite seu nickname"<<endl;
+    getline(cin, nick1);
+    cout<<"Jogador 2, digite seu nickname"<<endl;
+    getline(cin, nick2);
+    cout << "Então vamos começar a partida..." << endl;
+}
+
+void rodada(Jogo * oponente, string& nick,string& nick_oponente, bool cond, int& x, int& y){
+    oponente->imprimir(nick_oponente);
+    if(cond) {
+        cout << "Rodada do Bombardeio" << endl;
+    }
+    cout << "Turno de "<<nick<< endl;
+    cout << "Digite as coordenadas x e y do ataque(de 0 a 12):" << endl;
+    input_coordenadas(x,y);
+    if(cond){
+        oponente->bombardeio(x,y);
+    }else {
+        oponente->atacar(x, y);
+    }
+    limpar(3);
 }
 
 void partida(){
     string path = "doc/map_";
     int d, m;
     escolher_modo_de_jogo(m);
-    this_thread::sleep_for(chrono::seconds(1));
-    cout << "\033[2J\033[1;1H";
+    limpar(1);
     if(m==2){
         cout<<"No modo Bombardeio, a cada 3 rodadas, "
             <<"o próximo ataque realizado tem 4 tiros bônus e randômicos"<<endl;
     }
     escolher_mapa(d,path);
     string nick1, nick2;
-    cout<<"Jogador 1, digite seu nickname"<<endl;
-    getline(cin, nick1);
-    cout<<"Jogador 2, digite seu nickname"<<endl;
-    getline(cin, nick2);
-    cout << "Então vamos começar a partida..." << endl;
-    Jogo *player_1 = new Jogo("# player_1", path);
-    Jogo *player_2 = new Jogo("# player_2", path);
-    this_thread::sleep_for(chrono::seconds(1));
-    cout << "\033[2J\033[1;1H";
+    get_nicks(nick1,nick2);
+    Jogo *jogo1 = new Jogo("# player_1", path);
+    Jogo *jogo2 = new Jogo("# player_2", path);
+    limpar(1);
     int i = 1, c = 1;
     while (true) {
-        int x, y;
+        int x = 0, y = 0;
         if (i % 2) {
-            player_2->imprimir(nick2);
-            if(m == 2 && c%4 == 0) {
-                cout << "Rodada do Bombardeio" << endl;
-            }
-            cout << "Turno de "<<nick1<< endl;
-            cout << "Digite as coordenadas x e y do ataque(de 0 a 12):" << endl;
-            input_coordenadas(x,y);
-            if(m == 2 && c%4 == 0){
-                player_2->bombardeio(x,y);
-                c = 0;
-            }else {
-                player_2->atacar(x, y);
-            }
-            this_thread::sleep_for(chrono::seconds(2));
-            cout << "\033[2J\033[1;1H";
-            if (verificar_condicao(player_2,player_1,nick1,nick2)) {
+            bool is_bombard = (m == 2 && c%4 == 0);
+            rodada(jogo2,nick1,nick2,is_bombard,x,y);
+            if (verificar_condicao(jogo2,jogo1,nick1,nick2)) {
                 break;
             }
+            if(c % 4 == 0) c= 0;
             c++;
         } else {
-            player_1->imprimir(nick1);
-            if(m == 2 && i%8 == 0) {
-                cout << "Rodada do Bombardeio" << endl;
-            }
-            cout << "Turno de "<< nick2 << endl;
-            cout << "Digite as coordenadas x e y do ataque(de 0 a 12)" << endl;
-            input_coordenadas(x,y);
-            if(m == 2 && i%8 == 0){
-                player_1->bombardeio(x,y);
-            }else {
-                player_1->atacar(x, y);
-            }
-            this_thread::sleep_for(chrono::seconds(2));
-            cout << "\033[2J\033[1;1H";
-            if (verificar_condicao(player_1,player_2,nick2,nick1)) {
+            bool is_bombard = (m == 2 && i%8 == 0);
+            rodada(jogo2,nick1,nick2,is_bombard,x,y);
+            if (verificar_condicao(jogo1,jogo2,nick2,nick1)) {
                 break;
             }
         }
