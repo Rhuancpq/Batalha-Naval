@@ -68,7 +68,7 @@ void input_coordenadas(int& x, int& y){
 bool verificar_condicao(Jogo * oponente, Jogo * player,string& nick,string& nick_oponente){
     if (oponente->condicao_de_vit()) {
         cout << nick <<"ganhou" << endl;
-        oponente->imprimir(nick);
+        oponente->imprimir(nick_oponente);
         cout<<"Pontuação de "<<nick<<":"<<endl;
         cout<<oponente->pontuacao()<<" embarcações destruidas"<<endl;
         cout<<"Pontuação de "<<nick_oponente<<":"<<endl;
@@ -122,7 +122,7 @@ void escolher_modo_de_jogo(int& modo){
     limpar(1);
 }
 
-void get_nicks(string nick1, string nick2){
+void get_nicks(string& nick1, string& nick2){
     cout<<"Jogador 1, digite seu nickname"<<endl;
     getline(cin, nick1);
     cout<<"Jogador 2, digite seu nickname"<<endl;
