@@ -46,16 +46,69 @@ bool jogar_novamente() {
     return a == "S";
 }
 
-void partida(){
-    string path = "doc/map_";
-    int d, m;
+void input_coordenadas(int& x, int& y){
+    while(true) {
+        cin>>x>>y;
+        if ((x >= 0 && x < 13 && y < 13 && y >= 0) && !cin.fail()) {
+            cin.ignore(32767,'\n');
+            break;
+        }else{
+            cin.clear();
+            cin.ignore(32767,'\n');
+            cout<<"Entrada inválida, insira novamente as coordenadas:"<<endl;
+        }
+    }
+}
+
+bool verificar_condicao(Jogo * oponente, Jogo * player,string& nick,string& nick_oponente){
+    if (oponente->condicao_de_vit()) {
+        cout << nick <<"ganhou" << endl;
+        oponente->imprimir(nick);
+        cout<<"Pontuação de "<<nick<<":"<<endl;
+        cout<<oponente->pontuacao()<<" embarcações destruidas"<<endl;
+        cout<<"Pontuação de "<<nick_oponente<<":"<<endl;
+        cout<<player->pontuacao()<<" embarcações destruidas"<<endl;
+        delete oponente;
+        delete player;
+        return true;
+    }
+    return false;
+}
+
+void escolher_mapa(int& digito, string& path){
+    cout << "Você pode escolher um entre três mapas para jogar..." << endl;
+    cout << "Digite 1 para escolher o mapa 1" << endl;
+    cout << "Digite 2 para escolher o mapa 2" << endl;
+    cout << "Digite 3 para escolher o mapa 3" << endl;
+    cout << "Digite 4 para escolher um mapa diferente" << endl;
+    while(true) {
+        digito = getInput<int>();
+        if (digito >= 1 && digito <= 4) {
+            break;
+        }else{
+            cout<<"Entrada inválida, insira novamente:"<<endl;
+        }
+    }
+    if(digito == 4){
+        cout<<"Digite o nome e a extensão do arquivo"<<endl;
+        string nome_do_arquivo;
+        nome_do_arquivo = getInput<string>();
+        path = "doc/";
+        path = path + nome_do_arquivo;
+    }else {
+        char t = digito + '0';
+        path = path + t + ".txt";
+    }
+}
+
+void escolher_modo_de_jogo(int& modo){
     cout << "Bem vindo ao Batalha Naval" << endl;
     cout << "Escolha um modo de jogo:" << endl;
     cout << "1. Clássico" <<endl;
     cout << "2. Bombardeio"<<endl;
     while(true) {
-        m = getInput<int>();
-        if (m >= 1 && m <= 2) {
+        modo = getInput<int>();
+        if (modo >= 1 && modo <= 2) {
             break;
         }else{
             cout<<"Entrada inválida, insira novamente:"<<endl;
@@ -63,33 +116,19 @@ void partida(){
     }
     this_thread::sleep_for(chrono::seconds(1));
     cout << "\033[2J\033[1;1H";
+}
+
+void partida(){
+    string path = "doc/map_";
+    int d, m;
+    escolher_modo_de_jogo(m);
+    this_thread::sleep_for(chrono::seconds(1));
+    cout << "\033[2J\033[1;1H";
     if(m==2){
         cout<<"No modo Bombardeio, a cada 3 rodadas, "
             <<"o próximo ataque realizado tem 4 tiros bônus e randômicos"<<endl;
     }
-    cout << "Você pode escolher um entre três mapas para jogar..." << endl;
-    cout << "Digite 1 para escolher o mapa 1" << endl;
-    cout << "Digite 2 para escolher o mapa 2" << endl;
-    cout << "Digite 3 para escolher o mapa 3" << endl;
-    cout << "Digite 4 para escolher um mapa diferente" << endl;
-    while(true) {
-        d = getInput<int>();
-        if (d >= 1 && d <= 4) {
-            break;
-        }else{
-            cout<<"Entrada inválida, insira novamente:"<<endl;
-        }
-    }
-    if(d == 4){
-        cout<<"Digite o nome e a extensão do arquivo"<<endl;
-        string nome_do_arquivo;
-        nome_do_arquivo = getInput<string>();
-        path = "doc/";
-        path = path + nome_do_arquivo;
-    }else {
-        char t = d + '0';
-        path = path + t + ".txt";
-    }
+    escolher_mapa(d,path);
     string nick1, nick2;
     cout<<"Jogador 1, digite seu nickname"<<endl;
     getline(cin, nick1);
@@ -110,17 +149,7 @@ void partida(){
             }
             cout << "Turno de "<<nick1<< endl;
             cout << "Digite as coordenadas x e y do ataque(de 0 a 12):" << endl;
-            while(true) {
-                cin>>x>>y;
-                if ((x >= 0 && x < 13 && y < 13 && y >= 0) && !cin.fail()) {
-                    cin.ignore(32767,'\n');
-                    break;
-                }else{
-                    cin.clear();
-                    cin.ignore(32767,'\n');
-                    cout<<"Entrada inválida, insira novamente as coordenadas:"<<endl;
-                }
-            }
+            input_coordenadas(x,y);
             if(m == 2 && c%4 == 0){
                 player_2->bombardeio(x,y);
                 c = 0;
@@ -129,15 +158,7 @@ void partida(){
             }
             this_thread::sleep_for(chrono::seconds(2));
             cout << "\033[2J\033[1;1H";
-            if (player_2->condicao_de_vit()) {
-                cout << nick1 <<" ganhou" << endl;
-                player_2->imprimir(nick2);
-                cout<<"Pontuação de "<<nick1<<":"<<endl;
-                cout<<player_2->pontuacao()<<endl;
-                cout<<"Pontuação de "<<nick2<<":"<<endl;
-                cout<<player_1->pontuacao()<<endl;
-                delete player_1;
-                delete player_2;
+            if (verificar_condicao(player_2,player_1,nick1,nick2)) {
                 break;
             }
             c++;
@@ -148,17 +169,7 @@ void partida(){
             }
             cout << "Turno de "<< nick2 << endl;
             cout << "Digite as coordenadas x e y do ataque(de 0 a 12)" << endl;
-            while(true) {
-                cin>>x>>y;
-                if ((x >= 0 && x < 13 && y < 13 && y >= 0) && !cin.fail()) {
-                    cin.ignore(32767,'\n');
-                    break;
-                }else{
-                    cin.clear();
-                    cin.ignore(32767,'\n');
-                    cout<<"Entrada inválida, insira novamente as coordenadas:"<<endl;
-                }
-            }
+            input_coordenadas(x,y);
             if(m == 2 && i%8 == 0){
                 player_1->bombardeio(x,y);
             }else {
@@ -166,15 +177,7 @@ void partida(){
             }
             this_thread::sleep_for(chrono::seconds(2));
             cout << "\033[2J\033[1;1H";
-            if (player_1->condicao_de_vit()) {
-                cout << nick2 <<"ganhou" << endl;
-                player_1->imprimir(nick1);
-                cout<<"Pontuação de "<<nick2<<":"<<endl;
-                cout<<player_1->pontuacao()<<endl;
-                cout<<"Pontuação de "<<nick1<<":"<<endl;
-                cout<<player_2->pontuacao()<<endl;
-                delete player_1;
-                delete player_2;
+            if (verificar_condicao(player_1,player_2,nick2,nick1)) {
                 break;
             }
         }

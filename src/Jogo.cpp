@@ -257,6 +257,8 @@ void Jogo::bombardeio(int x, int y) {
             disparos[x_temp][y_temp] = true;
         }else{
             if(Mapa[x_temp][y_temp].second->get_corpo(posicao_unidades[x_temp][y_temp])->get_vida()<=0) {
+                cout<<"Míssil em embarcação destruída!!!"<<endl;
+                if((dist(mt)%12))cout<<"Pode isso arnaldo??"<<endl;
             }else {
                 Mapa[x_temp][y_temp].second->defender(x_temp,y_temp);
             }
@@ -277,7 +279,7 @@ void Jogo::bombardeio(int x, int y) {
             cout<<"A um passo de quase nada!!"<<endl;
             break;
         case 4:
-            cout<<"Quem Sabe da próxima seus mísseis acertem algo!!"<<endl;
+            cout<<"Quem sabe da próxima seus mísseis acertem algo!!"<<endl;
             break;
     }
     this_thread::sleep_for(chrono::seconds(2));
