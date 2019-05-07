@@ -90,6 +90,11 @@ void partida(){
         char t = d + '0';
         path = path + t + ".txt";
     }
+    string nick1, nick2;
+    cout<<"Jogador 1, digite seu nickname"<<endl;
+    nick1 = getInput<string>();
+    cout<<"Jogador 2, digite seu nickname"<<endl;
+    nick2 = getInput<string>();
     cout << "Então vamos começar a partida..." << endl;
     Jogo *player_1 = new Jogo("# player_1", path);
     Jogo *player_2 = new Jogo("# player_2", path);
@@ -99,11 +104,11 @@ void partida(){
     while (true) {
         int x, y;
         if (i % 2) {
-            player_2->imprimir();
+            player_2->imprimir(nick2);
             if(m == 2 && c%4 == 0) {
                 cout << "Rodada do Bombardeio" << endl;
             }
-            cout << "Turno do jogador 1" << endl;
+            cout << "Turno de "<<nick1<< endl;
             cout << "Digite as coordenadas x e y do ataque(de 0 a 12):" << endl;
             while(true) {
                 cin>>x>>y;
@@ -125,19 +130,21 @@ void partida(){
             this_thread::sleep_for(chrono::seconds(2));
             cout << "\033[2J\033[1;1H";
             if (player_2->condicao_de_vit()) {
-                cout << "Jogador 1 ganhou" << endl;
-                player_2->imprimir();
+                cout << nick1 <<" ganhou" << endl;
+                player_2->imprimir(nick2);
+                cout<<"Pontuação de "<<nick1<<":"<<endl;
+                cout<<player_2->pontuacao()<<endl;
                 delete player_1;
                 delete player_2;
                 break;
             }
             c++;
         } else {
-            player_1->imprimir();
+            player_1->imprimir(nick1);
             if(m == 2 && i%8 == 0) {
                 cout << "Rodada do Bombardeio" << endl;
             }
-            cout << "Turno do jogador 2" << endl;
+            cout << "Turno de "<< nick2 << endl;
             cout << "Digite as coordenadas x e y do ataque(de 0 a 12)" << endl;
             while(true) {
                 cin>>x>>y;
@@ -158,8 +165,10 @@ void partida(){
             this_thread::sleep_for(chrono::seconds(2));
             cout << "\033[2J\033[1;1H";
             if (player_1->condicao_de_vit()) {
-                cout << "Jogador 2 ganhou" << endl;
-                player_1->imprimir();
+                cout << nick2 <<"ganhou" << endl;
+                player_1->imprimir(nick1);
+                cout<<"Pontuação de "<<nick2<<":"<<endl;
+                cout<<player_1->pontuacao()<<endl;
                 delete player_1;
                 delete player_2;
                 break;

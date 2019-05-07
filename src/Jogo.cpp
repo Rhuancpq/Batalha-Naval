@@ -138,8 +138,8 @@ Jogo::~Jogo() {
     }
 }
 
-void Jogo::imprimir() {
-    cout<<"\033[5m                 Mapa do "<<jogador<<preto<<endl;
+void Jogo::imprimir(string& nome) {
+    cout<<"\033[5m                 Mapa de "<<nome<<preto<<endl;
     for(int a = 0; a < 13; a++){
         if(a >= 10){
             cout<<azul<<"~~"<<preto;
@@ -281,4 +281,14 @@ void Jogo::bombardeio(int x, int y) {
             break;
     }
     this_thread::sleep_for(chrono::seconds(2));
+}
+
+int Jogo::pontuacao() {
+    int pont = 0;
+    for(auto x : Embarcacoes){
+        if(x->get_vivo()){
+            pont++;
+        }
+    }
+    return pont;
 }

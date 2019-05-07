@@ -22,7 +22,8 @@ public:
     Jogo(const string &jogador, const string &mapa);
     ~Jogo();
     void pre_inicializar();
-    void imprimir();
+    void imprimir(string& nome);
+    int pontuacao();
     bool condicao_de_vit();
     void atacar(int x, int y);
     void bombardeio(int x, int y);
