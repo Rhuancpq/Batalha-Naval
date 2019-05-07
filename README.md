@@ -9,7 +9,7 @@
 
 **Certifique-se que tem instalado o git em seu sistema**
 
-* Procure pelo botão no **clone** na parte superior direita do site, copie o endereço SSH ou HTTPS
+* Procure pelo botão **clone** na parte superior direita do site, copie o endereço SSH ou HTTPS
 * Abra o terminal no diretório em que deseja instalar o jogo
 * Execute o comando ***sem os colchetes***:
 ```
