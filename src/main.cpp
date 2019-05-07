@@ -19,6 +19,8 @@ int main(int argc, char ** argv) {
         cerr<< "Exceção capturada: "<<e.what()<<endl;
     }catch(exception &e){
         cerr<< "Exception: "<<e.what()<<endl;
+    }catch(...){
+        cerr<< "Excecao desconhecida"<<endl;
     }
     return  0;
 }
