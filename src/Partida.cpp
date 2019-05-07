@@ -174,7 +174,7 @@ void partida(){
             c++;
         } else {
             bool is_bombard = (m == 2 && i%8 == 0);
-            rodada(jogo2,nick1,nick2,is_bombard,x,y);
+            rodada(jogo2,nick2,nick1,is_bombard,x,y);
             if (verificar_condicao(jogo1,jogo2,nick2,nick1)) {
                 break;
             }
