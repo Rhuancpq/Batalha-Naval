@@ -92,9 +92,9 @@ void partida(){
     }
     string nick1, nick2;
     cout<<"Jogador 1, digite seu nickname"<<endl;
-    nick1 = getInput<string>();
+    getline(cin, nick1);
     cout<<"Jogador 2, digite seu nickname"<<endl;
-    nick2 = getInput<string>();
+    getline(cin, nick2);
     cout << "Então vamos começar a partida..." << endl;
     Jogo *player_1 = new Jogo("# player_1", path);
     Jogo *player_2 = new Jogo("# player_2", path);
